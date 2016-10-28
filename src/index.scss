@@ -1,0 +1,19 @@
+section {
+	min-height:500px;
+}
+
+section h3 {
+	font-size:12px;
+}
+
+:global .verticalList {
+	position: fixed;
+}
+
+:global .horziontalList {
+	position: relative;
+}
+
+:global .active {
+	color: red;
+}
