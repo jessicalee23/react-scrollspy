@@ -9,33 +9,43 @@ class ScrollSpy extends React.Component {
  constructor(props) {
     super(props);
     this.state  = {
-       currentSection : 0
+       currentSection : 0,
+       positions : []
     }
  }
  scrollingPage() {
-    var vm = this;
-    window.onscroll = function(ev) {
-        //console.log(document.body.offsetHeight)
-        if (window.scrollY > 508) {
-            vm.setState({
-                currentSection : 2
-            })
-        }
-    };
+     
+    let currentNumber = 0;
+    let vm = this;
+    
+    if (this.state.positions.length > 0) {
+        this.state.positions.forEach(function(e , i) {
+            if (window.scrollY >= e) {
+               currentNumber = i; 
+            } 
+        })
+        this.setState({currentSection:currentNumber})
+   }
  }
- getSectionOffset(pItem) {
-    return this.props.nameSection.forEach((e) => {
-         console.log(document.getElementById(e).offsetTop);
-     })
+ getSectionOffset() {
+     let sectionPos = [];
+     
+     this.props.nameSection.forEach(function(e) {
+        sectionPos.push(document.getElementById(e).offsetTop)
+     });
+     
+     return this.setState({positions : sectionPos});
  }
  activeLink(i) {
    return this.setState({
        currentSection : i
     });
  }
+ componentDidUpdate(prevProps, prevState) {
+ }
  componentDidMount () {
-   this.scrollingPage();
-   this.getSectionOffset();
+   this.getSectionOffset(); 
+   window.addEventListener('scroll', this.scrollingPage.bind(this))  
  }
  render() {
      let lists = this.props.nameSection;
