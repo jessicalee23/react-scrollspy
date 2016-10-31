@@ -3,6 +3,7 @@ import React from 'react';
 import CSSModules from 'react-css-modules';
 import ReactDOM  from 'react-dom';
 import Immutable from 'immutable';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class ScrollSpy extends React.Component {
     
