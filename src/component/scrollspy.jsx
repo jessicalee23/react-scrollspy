@@ -3,7 +3,21 @@ import React from 'react';
 import CSSModules from 'react-css-modules';
 import ReactDOM  from 'react-dom';
 import Immutable from 'immutable';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
+export function scrollTo(element, to, duration) {
+    
+    if (duration <= 0) return;
+    
+    const difference = to - element.scrollTop;
+    const perTick = difference / duration * 10;
+
+    setTimeout(function() {
+        element.scrollTop = element.scrollTop + perTick;
+        if (element.scrollTop === to) return;
+            scrollTo(element, to, duration - 10);
+    }, 10);
+}
+
 
 class ScrollSpy extends React.Component {
     
@@ -37,12 +51,16 @@ class ScrollSpy extends React.Component {
      
      return this.setState({positions : sectionPos});
  }
- activeLink(i) {
-   return this.setState({
+ activeLink(event, i) {
+    this.setState({
        currentSection : i
     });
+    this.goToSection(event.target.href.split("#")[1]);
+    return event.preventDefault();
  }
- componentDidUpdate(prevProps, prevState) {
+  goToSection(section) {
+   let top = document.getElementById(section).offsetTop;
+   return scrollTo(document.body, top , this.props.scrollDuration);
  }
  componentDidMount () {
    this.getSectionOffset(); 
@@ -51,7 +69,7 @@ class ScrollSpy extends React.Component {
  render() {
      let lists = this.props.nameSection;
      let sectionLists = lists.map((name, i) => {
-         return <li key={name}><a href={'#'+name} onClick={this.activeLink.bind(this , i)} className={i == this.state.currentSection ?'active' : ''}>{name}</a></li>;
+         return <li key={name}><a href={'#'+name} onClick={(event)=>this.activeLink(event, i)} className={i == this.state.currentSection ?'active' : ''}>{name}</a></li>;
      })
      return (
          
