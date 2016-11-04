@@ -4,6 +4,21 @@ import CSSModules from 'react-css-modules';
 import ReactDOM  from 'react-dom';
 import Immutable from 'immutable';
 
+export function scrollTo(element, to, duration) {
+    
+    if (duration <= 0) return;
+    
+    const difference = to - element.scrollTop;
+    const perTick = difference / duration * 10;
+
+    setTimeout(function() {
+        element.scrollTop = element.scrollTop + perTick;
+        if (element.scrollTop === to) return;
+            scrollTo(element, to, duration - 10);
+    }, 10);
+}
+
+
 class ScrollSpy extends React.Component {
     
  constructor(props) {
@@ -36,10 +51,15 @@ class ScrollSpy extends React.Component {
      
      return this.setState({positions : sectionPos});
  }
+
  activeLink(i) {
      if (i == this.state.positions.length -1) {
         setTimeout(function() { this.setState({currentSection: this.state.positions.length -1}); }.bind(this), 10);
      }
+ }
+  goToSection(section) {
+   let top = document.getElementById(section).offsetTop;
+   return scrollTo(document.body, top , this.props.scrollDuration);
  }
  componentDidMount () {
    this.getSectionOffset(); 

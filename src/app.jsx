@@ -12,25 +12,26 @@ class App extends React.Component {
         <div className="col-md-12">
           <div className="col-md-3" ref="scrollSection">
           
-            <ScrollSpy 
+             <ScrollSpy 
                 targetSection="scrollSection" 
                 direction="vertical" 
-                nameSection = {['XXXX GOld','VB','Carlin Draught','Tooheys New']}
+                nameSection = {['XXXX_GOld','VB','Carlin_Draught','Tooheys_New']}
+                scrollDuration = "700"
               />
               
           </div>
           <div className="col-md-9">
             <sectionWrapper id="scrollSection">
-              <section id="XXXX GOld">
+              <section id="XXXX_GOld">
                   <h3>XXXX Gold</h3>
               </section>
               <section id="VB">
                   <h3>VB</h3>
               </section>
-              <section id="Carlin Draught">
+              <section id="Carlin_Draught">
                   <h3>Carlton Draught</h3>
               </section>
-              <section id="Tooheys New">
+              <section id="Tooheys_New">
                   <h3>Tooheys New</h3>
               </section>
             </sectionWrapper>
