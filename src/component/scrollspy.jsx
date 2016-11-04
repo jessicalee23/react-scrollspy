@@ -41,7 +41,12 @@ class ScrollSpy extends React.Component {
        currentSection : i
     });
  }
+ componentWillUpdate(nextProps, nextState) {
+   
+   //console.log(nextState.currentSection + ' next state')
+ }
  componentDidUpdate(prevProps, prevState) {
+  // console.log(prevState.currentSection + ' prev state')
  }
  componentDidMount () {
    this.getSectionOffset(); 
