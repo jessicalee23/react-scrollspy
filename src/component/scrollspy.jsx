@@ -52,10 +52,12 @@ class ScrollSpy extends React.Component {
      return this.setState({positions : sectionPos});
  }
 
- activeLink(i) {
+ activeLink(event, i) {
      if (i == this.state.positions.length -1) {
         setTimeout(function() { this.setState({currentSection: this.state.positions.length -1}); }.bind(this), 10);
      }
+     this.goToSection(event.target.href.split("#")[1]);
+     return event.preventDefault();
  }
   goToSection(section) {
    let top = document.getElementById(section).offsetTop;
