@@ -37,16 +37,9 @@ class ScrollSpy extends React.Component {
      return this.setState({positions : sectionPos});
  }
  activeLink(i) {
-   return this.setState({
-       currentSection : i
-    });
- }
- componentWillUpdate(nextProps, nextState) {
-   
-   //console.log(nextState.currentSection + ' next state')
- }
- componentDidUpdate(prevProps, prevState) {
-  // console.log(prevState.currentSection + ' prev state')
+     if (i == this.state.positions.length -1) {
+        setTimeout(function() { this.setState({currentSection: this.state.positions.length -1}); }.bind(this), 10);
+     }
  }
  componentDidMount () {
    this.getSectionOffset(); 
