@@ -60,6 +60,7 @@ class ScrollSpy extends React.Component {
      return event.preventDefault();
  }
   goToSection(section) {
+      console.log(section)
    let top = document.getElementById(section).offsetTop;
    return scrollTo(document.body, top , this.props.scrollDuration);
  }
@@ -70,7 +71,8 @@ class ScrollSpy extends React.Component {
  render() {
      let lists = this.props.nameSection;
      let sectionLists = lists.map((name, i) => {
-         return <li key={name}><a href={'#'+name} onClick={this.activeLink.bind(this , i)} className={i == this.state.currentSection ?'active' : ''}>{name}</a></li>;
+         return <li key={name}><a href={'#'+name} onClick={(event)=>this.activeLink.bind(this, event, i)} className={i == this.state.currentSection ?'active' : ''}>{name}</a></li>;
+         //return <li key={name}><a href={'#'+name} onClick={this.activeLink.bind(this , i)} className={i == this.state.currentSection ?'active' : ''}>{name}</a></li>;
      })
      return (
          
