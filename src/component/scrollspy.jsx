@@ -71,7 +71,7 @@ class ScrollSpy extends React.Component {
  render() {
      let lists = this.props.nameSection;
      let sectionLists = lists.map((name, i) => {
-         return <li key={name}><a href={'#'+name} onClick={(event)=>this.activeLink.bind(this, event, i)} className={i == this.state.currentSection ?'active' : ''}>{name}</a></li>;
+         return <li key={name}><a href={'#'+name} onClick={(event)=>this.activeLink(event, i)} className={i == this.state.currentSection ?'active' : ''}>{name}</a></li>;
          //return <li key={name}><a href={'#'+name} onClick={this.activeLink.bind(this , i)} className={i == this.state.currentSection ?'active' : ''}>{name}</a></li>;
      })
      return (
