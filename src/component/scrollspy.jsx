@@ -4,6 +4,7 @@ import CSSModules from 'react-css-modules';
 import ReactDOM  from 'react-dom';
 import Immutable from 'immutable';
 
+
 export function scrollTo(element, to, duration) {
     
     if (duration <= 0) return;
@@ -31,8 +32,7 @@ class ScrollSpy extends React.Component {
  scrollingPage() {
      
     let currentNumber = 0;
-    let vm = this;
-    
+   
     if (this.state.positions.length > 0) {
         this.state.positions.forEach(function(e , i) {
             if (window.scrollY >= e) {
@@ -43,7 +43,7 @@ class ScrollSpy extends React.Component {
    }
  }
  getSectionOffset() {
-     let sectionPos = [];
+     const sectionPos = [];
      
      this.props.nameSection.forEach(function(e) {
         sectionPos.push(document.getElementById(e).offsetTop)
@@ -54,14 +54,13 @@ class ScrollSpy extends React.Component {
 
  activeLink(event, i) {
      if (i == this.state.positions.length -1) {
-        setTimeout(function() { this.setState({currentSection: this.state.positions.length -1}); }.bind(this), 10);
+        setTimeout(function() { this.setState({currentSection:this.state.positions.length -1}); }.bind(this), this.props.scrollDuration);
      }
      this.goToSection(event.target.href.split("#")[1]);
      return event.preventDefault();
  }
   goToSection(section) {
-      console.log(section)
-   let top = document.getElementById(section).offsetTop;
+   const top = document.getElementById(section).offsetTop;
    return scrollTo(document.body, top , this.props.scrollDuration);
  }
  componentDidMount () {
@@ -69,18 +68,18 @@ class ScrollSpy extends React.Component {
    window.addEventListener('scroll', this.scrollingPage.bind(this))  
  }
  render() {
-     let lists = this.props.nameSection;
-     let sectionLists = lists.map((name, i) => {
-         return <li key={name}><a href={'#'+name} onClick={(event)=>this.activeLink(event, i)} className={i == this.state.currentSection ?'active' : ''}>{name}</a></li>;
-         //return <li key={name}><a href={'#'+name} onClick={this.activeLink.bind(this , i)} className={i == this.state.currentSection ?'active' : ''}>{name}</a></li>;
+     const lists = this.props.nameSection;
+     const sectionLists = lists.map((name, i) => {
+         return <li key={name} className="nav-item"><a href={'#'+name} onClick={(event)=>this.activeLink(event, i)} className={i == this.state.currentSection ?'active nav-link' : ''}>{name}</a></li>;
      })
      return (
-         
+        
          <div className={this.props.direction + 'List'}>
-             <ul ref="links">
+             <ul ref="links" className={this.props.direction == 'vertical' ? 'nav nav-pills nav-stacked' : 'nav nav-pills'}>
                 {sectionLists}
              </ul>
          </div>
+        
      )
  }   
     
