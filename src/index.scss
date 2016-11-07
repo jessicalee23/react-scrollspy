@@ -1,3 +1,4 @@
+
 section {
 	min-height:500px;
 }
@@ -16,4 +17,11 @@ section h3 {
 
 :global .active {
 	color: red;
+}
+:global a , :global a:focus, :global a.active {
+	text-decoration: none; color:#0275d8;
+}
+:global a:hover {
+	text-decoration: none;
+	color:#0275d8;
 }
