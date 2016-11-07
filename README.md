@@ -2,15 +2,16 @@
 Simple React scrollspy
 
 
-# use
-<pre>
+# Usage
 
-<ScrollSpy targetSection="scrollSection" 
-           direction="vertical" 
+```html
+<ScrollSpy targetSection = "scrollSection" 
+           direction = "vertical" 
            nameSection = {['XXXX_GOld','VB','Carlin_Draught','Tooheys_New']}
-           scrollDuration = "700"
-/>
-</pre>
+           scrollDuration = "700">
+```
+
+
 ### What's in it?
 
 * Simple src/index.jsx and src/index.css (local module css).
